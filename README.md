@@ -62,10 +62,10 @@ clock = FakeClock()
 bucket = TokenBucket(capacity=5, refill_rate=2.0, clock=clock)
 
 for _ in range(5):
-    assert bucket.try_acquire() is True   # burst up to capacity
-assert bucket.try_acquire() is False      # bucket empty
+    assert bucket.try_acquire() is True  # burst up to capacity
+assert bucket.try_acquire() is False  # bucket empty
 
-clock.advance(1.0)                         # 1s -> +2 tokens refilled
+clock.advance(1.0)  # 1s -> +2 tokens refilled
 assert bucket.try_acquire() is True
 
 # Sliding window: 100 requests per 60s, exact rolling count.
